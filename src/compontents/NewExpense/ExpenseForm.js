@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './ExpenseForm.css';
 
-const Expenseform=(prpos)=>{
+const Expenseform=(props)=>{
   const [enteredTitle,setEnteredTitle] = useState('');
   const [enteredAmount,SetEnteredAmount]=useState('');
   const [enteredDate,setEnteredDate]=useState('');
-
+  
   // const [userInput,setUserInput] = useState({
   //   enteredTitle:'',
   //   enteredAmount:'',
@@ -39,14 +39,22 @@ const Expenseform=(prpos)=>{
       title:enteredTitle,
       amount:enteredAmount,
       date : new Date(enteredDate)
-    }
-    prpos.onSaveExpenseDate(expenseData);
+    };
+    
+   props.onSaveExpenseDate(expenseData);
     // console.log(expenseData)
     setEnteredTitle('');
     SetEnteredAmount('');
     setEnteredDate('');
    }
-   return <form onSubmit={submitHandler}>
+
+  
+   return (
+   <div>
+    
+    
+  
+   <form onSubmit={submitHandler}>
     <div className='new-expense__controls'>
       <div className='new-expense__control'>
         <label>Title</label>
@@ -62,9 +70,14 @@ const Expenseform=(prpos)=>{
          onChange={dateChangeHandler} />
       </div>
     </div>
-    <div className='new-expense__actions'>   <button type='submit'>Add Expense</button></div>
+    <div className='new-expense__actions'> 
+    <button type="button" onClick={props.onCancel}>Cancel</button>  <button type='submit'>Add Expense</button>
+   
+    </div>
    
    </form>
+ </div>
+   )
 }
 
 export default Expenseform;
